@@ -14,12 +14,14 @@ Project Ends: 2nd Oct 2022
 
 Project Duration: 6 Days
 
----
+#
 
 ## Tech Stack
 
-Axios | Chakra UI | JavaScript | React JS
+Chakra UI | JavaScript | React JS
 
----
+#
 
-## Components
+## Dependencies
+
+axios | react-router-dom (V6) | chakra-ui/react | emotion/react | emotion/styled | framer-motion
