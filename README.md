@@ -14,13 +14,9 @@ Project Ends: 2nd Oct 2022
 
 Project Duration: 6 Days
 
-#
-
 ## Tech Stack
 
 Chakra UI | JavaScript | React JS
-
-#
 
 ## Dependencies
 
