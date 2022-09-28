@@ -3,6 +3,7 @@ import {
 	Button,
 	Center,
 	Container,
+	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormHelperText,
@@ -13,14 +14,17 @@ import {
 	Input,
 	InputGroup,
 	InputRightElement,
-	Spacer,
 	Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { Theme } from "../Context/ThemeContext";
+import * as actions from "../Context/AuthContext/actions";
 
 const Login = () => {
 	const { theme } = useContext(Theme);
+	const { dispatch } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -35,7 +39,20 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(password, email);
+		dispatch(actions.LOGIN_LOADING());
+		axios({
+			method: "GET",
+			url: `https://kphxpz.sse.codesandbox.io/users`,
+			params: { email: email, password: password },
+		})
+			.then((res) => {
+				console.log(res.data[0]);
+				dispatch(actions.LOGIN_SUCCESS(res.data[0]));
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch(actions.LOGIN_FAILURE(err));
+			});
 	};
 	return (
 		<div className={theme === "light" ? "light" : "dark"}>
@@ -119,20 +136,21 @@ const Login = () => {
 							</form>
 						</Box>
 					</GridItem>
-					<GridItem
-						rowSpan={1}
-						borderWidth="1px"
-						borderRadius="lg"
-						borderColor="gray.400"
-						p="8"
-					>
-						<Grid gap={"4"}>
+					<GridItem>
+						<Flex
+							direction={"column"}
+							justify={"space-evenly"}
+							borderWidth="1px"
+							borderRadius="lg"
+							gap={8}
+							p="8"
+							borderColor="gray.400"
+						>
 							<GridItem>
 								<Heading as="h1" size="lg">
 									Don't have an account?
 								</Heading>
 							</GridItem>
-							<Spacer />
 							<GridItem>
 								<Text>
 									With a SHOP.COM account, you can enjoy the following benefits:
@@ -141,7 +159,6 @@ const Login = () => {
 									addresses, exclusive emails and more.
 								</Text>
 							</GridItem>
-							<Spacer />
 							<GridItem>
 								<Center>
 									<Button colorScheme={"teal"} w={"80%"}>
@@ -149,7 +166,7 @@ const Login = () => {
 									</Button>
 								</Center>
 							</GridItem>
-						</Grid>
+						</Flex>
 					</GridItem>
 				</Grid>
 			</Container>
