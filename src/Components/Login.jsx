@@ -20,8 +20,13 @@ import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { Theme } from "../Context/ThemeContext";
-import * as actions from "../Context/AuthContext/actions";
+import {
+	LOGIN_FAILURE,
+	LOGIN_SUCCESS,
+	LOGIN_LOADING,
+} from "../Context/AuthContext/actions";
 
+console.log(LOGIN_FAILURE);
 const Login = () => {
 	const { theme } = useContext(Theme);
 	const { dispatch } = useContext(AuthContext);
@@ -39,7 +44,7 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(actions.LOGIN_LOADING());
+		dispatch({ type: LOGIN_LOADING });
 		axios({
 			method: "GET",
 			url: `https://kphxpz.sse.codesandbox.io/users`,
@@ -47,11 +52,11 @@ const Login = () => {
 		})
 			.then((res) => {
 				console.log(res.data[0]);
-				dispatch(actions.LOGIN_SUCCESS(res.data[0]));
+				dispatch({ type: LOGIN_SUCCESS, payload: res.data[0] });
 			})
 			.catch((err) => {
 				console.log(err);
-				dispatch(actions.LOGIN_FAILURE(err));
+				dispatch({ type: LOGIN_FAILURE });
 			});
 	};
 	return (
