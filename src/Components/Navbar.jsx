@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { Theme } from "../Context/ThemeContext";
 import { LOGOUT } from "../Context/AuthContext/actions";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
 	const { theme, toggleTheme } = useContext(Theme);
@@ -24,7 +25,9 @@ const Navbar = () => {
 					Logout
 				</Button>
 			) : (
-				<Button>Login</Button>
+				<NavLink to="/login">
+					<Button>Login</Button>
+				</NavLink>
 			)}
 		</div>
 	);
