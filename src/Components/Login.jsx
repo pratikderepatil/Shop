@@ -25,6 +25,7 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_LOADING,
 } from "../Context/AuthContext/actions";
+import { NavLink } from "react-router-dom";
 
 console.log(LOGIN_FAILURE);
 const Login = () => {
@@ -166,9 +167,11 @@ const Login = () => {
 							</GridItem>
 							<GridItem>
 								<Center>
-									<Button colorScheme={"teal"} w={"80%"}>
-										Sign Up
-									</Button>
+									<NavLink to="/signup">
+										<Button colorScheme={"teal"} w={"80%"}>
+											Sign Up
+										</Button>
+									</NavLink>
 								</Center>
 							</GridItem>
 						</Flex>
