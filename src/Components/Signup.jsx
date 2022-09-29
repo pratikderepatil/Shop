@@ -17,6 +17,7 @@ import {
 	PinInput,
 	PinInputField,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Theme } from "../Context/ThemeContext";
 
@@ -42,6 +43,24 @@ const Signup = () => {
 		console.log("password", password);
 		console.log("phone", phone);
 		console.log("Otp", otp);
+		axios({
+			method: "POST",
+			url: `https://kphxpz.sse.codesandbox.io/users`,
+			data: {
+				email: email,
+				password: password,
+				otp: otp,
+				firstname: first,
+				lastname: last,
+				phone: phone,
+			},
+		})
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	return (
