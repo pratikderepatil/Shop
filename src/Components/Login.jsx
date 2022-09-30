@@ -3,7 +3,6 @@ import {
 	Button,
 	Center,
 	Container,
-	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormHelperText,
@@ -19,7 +18,6 @@ import {
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
-import { Theme } from "../Context/ThemeContext";
 import {
 	LOGIN_FAILURE,
 	LOGIN_SUCCESS,
@@ -29,7 +27,6 @@ import { NavLink } from "react-router-dom";
 
 console.log(LOGIN_FAILURE);
 const Login = () => {
-	const { theme } = useContext(Theme);
 	const { dispatch } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -61,7 +58,7 @@ const Login = () => {
 			});
 	};
 	return (
-		<div className={theme === "light" ? "light" : "dark"}>
+		<div>
 			<Container
 				maxW={{ base: "full", lg: "container.xl" }}
 				p={{ lg: "8", sm: "0", xs: "0" }}
@@ -143,9 +140,7 @@ const Login = () => {
 						</Box>
 					</GridItem>
 					<GridItem>
-						<Flex
-							direction={"column"}
-							justify={"space-evenly"}
+						<Grid
 							borderWidth="1px"
 							borderRadius="lg"
 							gap={8}
@@ -166,15 +161,15 @@ const Login = () => {
 								</Text>
 							</GridItem>
 							<GridItem>
-								<Center>
-									<NavLink to="/signup">
+								<NavLink to="/signup">
+									<Center>
 										<Button colorScheme={"teal"} w={"80%"}>
 											Sign Up
 										</Button>
-									</NavLink>
-								</Center>
+									</Center>
+								</NavLink>
 							</GridItem>
-						</Flex>
+						</Grid>
 					</GridItem>
 				</Grid>
 			</Container>

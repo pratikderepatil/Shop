@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Center, Flex } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { Theme } from "../Context/ThemeContext";
@@ -11,25 +11,38 @@ const Navbar = () => {
 	const { state, dispatch } = useContext(AuthContext);
 
 	return (
-		<div>
+		<Flex justify={"space-between"} align="center" p="4">
 			Navbar
-			<Button onClick={toggleTheme}>
-				{theme === "light" ? "light" : "dark"}
-			</Button>
-			{state.isAuth ? (
-				<Button
-					onClick={() => {
-						dispatch({ type: LOGOUT });
-					}}
-				>
-					Logout
+			<Flex gap={4}>
+				<Button onClick={toggleTheme} variant="unstyled">
+					{theme === "light" ? (
+						<ion-icon name="moon-sharp" />
+					) : (
+						<ion-icon name="sunny-sharp" />
+					)}
 				</Button>
-			) : (
-				<NavLink to="/login">
-					<Button>Login</Button>
+				<NavLink to="/checkout">
+					<Button variant={"unstyled"}>
+						<Center>
+							<ion-icon size="medium" name="cart-sharp" />
+						</Center>
+					</Button>
 				</NavLink>
-			)}
-		</div>
+				{state.isAuth ? (
+					<Button
+						onClick={() => {
+							dispatch({ type: LOGOUT });
+						}}
+					>
+						Logout
+					</Button>
+				) : (
+					<NavLink to="/login">
+						<Button colorScheme="green">Login</Button>
+					</NavLink>
+				)}
+			</Flex>
+		</Flex>
 	);
 };
 

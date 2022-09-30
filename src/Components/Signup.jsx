@@ -18,11 +18,9 @@ import {
 	PinInputField,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { Theme } from "../Context/ThemeContext";
+import React, { useState } from "react";
 
 const Signup = () => {
-	const { theme } = useContext(Theme);
 	const [show, setShow] = useState(false);
 	const [show1, setShow1] = useState(false);
 	const [first, setFirst] = useState("");
@@ -64,7 +62,7 @@ const Signup = () => {
 	};
 
 	return (
-		<div className={theme === "light" ? "light" : "dark"}>
+		<div>
 			<Container
 				maxW={{ base: "full", lg: "container.xl", sm: "full" }}
 				p={{ lg: "8", sm: "0", xs: "0" }}
