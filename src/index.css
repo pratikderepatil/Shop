@@ -29,10 +29,10 @@ ion-icon {
 .lightNav {
 	color: black;
 	background-color: #c1c1c1;
-	padding: 20px;
+	position: fixed;
+	position: -webkit-sticky;
 }
 .darkNav {
 	color: white;
 	background-color: rgb(32, 32, 32);
-	padding: 20px;
 }
