@@ -1,3 +1,4 @@
+
 export const reducer = (state, { type, payload }) => {
 	switch (type) {
 		case "LOGIN_LOADING": {
@@ -11,6 +12,7 @@ export const reducer = (state, { type, payload }) => {
 			};
 		}
 		case "LOGIN_SUCCESS": {
+
 			return {
 				...state,
 				isLoading: false,
