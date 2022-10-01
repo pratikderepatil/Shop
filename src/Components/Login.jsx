@@ -23,11 +23,14 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_LOADING,
 } from "../Context/AuthContext/actions";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
+import { Theme } from "../Context/ThemeContext";
 
 console.log(LOGIN_FAILURE);
 const Login = () => {
-	const { dispatch } = useContext(AuthContext);
+	const { theme } = useContext(Theme);
+
+	const { state, dispatch } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -57,8 +60,11 @@ const Login = () => {
 				dispatch({ type: LOGIN_FAILURE });
 			});
 	};
+	if (state.isAuth) {
+		return <Navigate to="/" />;
+	}
 	return (
-		<div>
+		<div className={theme === "light" ? "light" : "dark"}>
 			<Container
 				maxW={{ base: "full", lg: "container.xl" }}
 				p={{ lg: "8", sm: "0", xs: "0" }}
