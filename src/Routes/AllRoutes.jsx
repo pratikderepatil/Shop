@@ -5,6 +5,8 @@ import Signup from "../Components/Signup";
 import Homepage from "../Pages/Homepage";
 import Checkout from "../Pages/Checkout";
 import PrivateRoutes from "./PrivateRoutes";
+import Products from "../Pages/Products";
+import ProductDetails from "../Pages/ProductDetails";
 
 const AllRoutes = () => {
 	return (
@@ -20,6 +22,8 @@ const AllRoutes = () => {
 					</PrivateRoutes>
 				}
 			/>
+			<Route path="product/:prod" element={<Products />} />
+			<Route path="product/productDetails/:details" element={<ProductDetails />} />
 		</Routes>
 	);
 };

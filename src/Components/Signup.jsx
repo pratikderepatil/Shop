@@ -65,7 +65,7 @@ const Signup = () => {
 	};
 
 	return (
-		<div className={theme === "light" ? "light" : "dark"}>
+		<div className={theme === "light" ? "light" : "dark"} style={{}}>
 			<Container
 				maxW={{ base: "full", lg: "container.xl", sm: "full" }}
 				p={{ lg: "8", sm: "0", xs: "0" }}
