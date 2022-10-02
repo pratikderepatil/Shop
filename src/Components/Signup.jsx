@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Theme } from "../Context/ThemeContext";
 
 const Signup = () => {
@@ -58,6 +59,7 @@ const Signup = () => {
 		})
 			.then((res) => {
 				console.log(res.data);
+				<Navigate to="/login" />;
 			})
 			.catch((err) => {
 				console.log(err);
