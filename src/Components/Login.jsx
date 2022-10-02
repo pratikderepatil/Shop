@@ -4,8 +4,6 @@ import {
 	Center,
 	Container,
 	FormControl,
-	FormErrorMessage,
-	FormHelperText,
 	FormLabel,
 	Grid,
 	GridItem,
@@ -16,7 +14,7 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import {
 	LOGIN_FAILURE,
@@ -29,6 +27,7 @@ import { Theme } from "../Context/ThemeContext";
 console.log(LOGIN_FAILURE);
 const Login = () => {
 	const { theme } = useContext(Theme);
+	const [loading, setLoading] = useState(false);
 
 	const { state, dispatch } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
@@ -36,14 +35,8 @@ const Login = () => {
 
 	const [show, setShow] = useState(false);
 
-	const inputRef = useRef(null);
-	useEffect(() => {
-		inputRef.current.focus();
-	}, []);
-	const isError = email === "";
-	const isErrorP = password === "";
-
 	const handleSubmit = (e) => {
+		setLoading(true);
 		e.preventDefault();
 		dispatch({ type: LOGIN_LOADING });
 		axios({
@@ -53,6 +46,7 @@ const Login = () => {
 		})
 			.then((res) => {
 				console.log(res.data[0]);
+				setLoading(false);
 				dispatch({ type: LOGIN_SUCCESS, payload: res.data[0] });
 			})
 			.catch((err) => {
@@ -67,6 +61,7 @@ const Login = () => {
 		<div className={theme === "light" ? "light" : "dark"}>
 			<Container
 				maxW={{ base: "full", lg: "container.xl" }}
+				mt={{ base: 10, sm: 10, md: 10, lg: 10 }}
 				p={{ lg: "8", sm: "0", xs: "0" }}
 			>
 				<Grid
@@ -92,26 +87,18 @@ const Login = () => {
 									Login
 								</Heading>
 								<br />
-								<FormControl isRequired isInvalid={isError}>
+								<FormControl isRequired>
 									<FormLabel>Email address</FormLabel>
 									<Input
-										ref={inputRef}
 										type="email"
 										borderColor="gray.400"
 										placeholder="name@example.com"
 										value={email}
 										onChange={(e) => setEmail(e.target.value)}
 									/>
-									{!isError ? (
-										<FormHelperText>
-											We'll never share your email.
-										</FormHelperText>
-									) : (
-										<FormErrorMessage>Email is required.</FormErrorMessage>
-									)}
 								</FormControl>
 								<br />
-								<FormControl isRequired isInvalid={isErrorP}>
+								<FormControl isRequired>
 									<FormLabel>Password</FormLabel>
 									<InputGroup size="md">
 										<Input
@@ -138,7 +125,13 @@ const Login = () => {
 								</FormControl>
 								<br />
 								<Center>
-									<Button mt={4} colorScheme="teal" type="submit" w={"80%"}>
+									<Button
+										mt={4}
+										colorScheme="teal"
+										type="submit"
+										w={"80%"}
+										isLoading={loading}
+									>
 										Submit
 									</Button>
 								</Center>

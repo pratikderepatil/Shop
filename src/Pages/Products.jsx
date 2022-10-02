@@ -1,4 +1,12 @@
-import { Box, Center, Flex, Grid, Image, Tooltip } from "@chakra-ui/react";
+import {
+	Box,
+	Center,
+	Flex,
+	Grid,
+	Image,
+	Skeleton,
+	Tooltip,
+} from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getData } from "../Components/ApiCall";
@@ -8,12 +16,90 @@ const Products = () => {
 	const { prod } = useParams();
 	const [data, setData] = useState([]);
 	const { theme } = useContext(Theme);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+		setLoading(true);
 		getData(prod).then((res) => {
 			setData(res.data.result);
+			setLoading(false);
 		});
 	}, [prod]);
+
+	if (loading) {
+		return (
+			<Grid
+				className={theme === "light" ? "light" : "dark"}
+				templateColumns={{
+					lg: "repeat(3,1fr)",
+					md: "repeat(2,1fr)",
+					sm: "repeat(1,1fr)",
+				}}
+				gap={[0, 2, 4]}
+			>
+				<Skeleton>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+				</Skeleton>
+				<Skeleton>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+				</Skeleton>
+				<Skeleton>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+				</Skeleton>
+				<Skeleton>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+				</Skeleton>
+				<Skeleton>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+				</Skeleton>
+				<Skeleton>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+					<div>contents wrapped</div>
+					<div>won't be visible</div>
+				</Skeleton>
+			</Grid>
+		);
+	}
 	return (
 		<div className={theme === "light" ? "light" : "dark"}>
 			<Grid

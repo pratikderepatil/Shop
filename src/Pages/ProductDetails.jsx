@@ -7,6 +7,8 @@ import {
 	Heading,
 	Image,
 	SimpleGrid,
+	SkeletonCircle,
+	SkeletonText,
 	Stack,
 	StackDivider,
 	Table,
@@ -25,22 +27,37 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../Components/ApiCall";
+import { addToCart } from "../Context/CartContext/action";
+import { CartContext } from "../Context/CartContext/CartContext";
 import { Theme } from "../Context/ThemeContext";
 
 const ProductDetails = () => {
+	const { dispatch } = useContext(CartContext);
+
 	const { details } = useParams();
 	let query = details.split("_").join("/");
 	const { theme } = useContext(Theme);
+	const [loading, setLoading] = useState(false);
 
 	const [data, setData] = useState([]);
 	const [status, setStatus] = useState(false);
 	useEffect(() => {
+		setLoading(true);
 		getProduct(query).then((res) => {
 			setData(res.data);
 			setStatus(true);
+			setLoading(false);
 		});
 	}, [query]);
 
+	if (loading) {
+		return (
+			<Box padding="6" boxShadow="lg" bg="white">
+				<SkeletonCircle size="10" />
+				<SkeletonText mt="4" noOfLines={4} spacing="4" />
+			</Box>
+		);
+	}
 	if (status) {
 		return (
 			<div className={theme === "light" ? "light" : "dark"}>
@@ -135,6 +152,7 @@ const ProductDetails = () => {
 									transform: "translateY(2px)",
 									boxShadow: "lg",
 								}}
+								onClick={() => dispatch(addToCart(data))}
 							>
 								Add to cart
 							</Button>
