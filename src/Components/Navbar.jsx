@@ -21,7 +21,6 @@ const Navbar = () => {
 		<div
 			className={theme === "light" ? "lightNav" : "darkNav"}
 			style={{ position: "sticky", top: "0px" }}
-			
 		>
 			<Flex
 				direction={"column"}

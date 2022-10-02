@@ -33,13 +33,7 @@ const Products = () => {
 							key={i}
 						>
 							<Flex w="full" alignItems="center" justifyContent="center" p={4}>
-								<Box
-									maxW="sm"
-									borderWidth="1px"
-									rounded="lg"
-									shadow="lg"
-									position="relative"
-								>
+								<Box maxW="sm" borderWidth="1px" rounded="lg" shadow="lg">
 									<Center>
 										<Image
 											src={ele.thumbnail}
@@ -82,7 +76,6 @@ const Products = () => {
 												<Tooltip
 													label="Add to cart"
 													bg="white"
-													placement={"top"}
 													color={"gray.800"}
 													fontSize={"1.2em"}
 												>

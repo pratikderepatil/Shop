@@ -1,6 +1,7 @@
 import {
 	Box,
 	Button,
+	Center,
 	Container,
 	Flex,
 	Heading,
@@ -47,19 +48,19 @@ const ProductDetails = () => {
 					<SimpleGrid
 						columns={{ base: 1, lg: 1 }}
 						spacing={{ base: 8, md: 10 }}
-						py={{ base: 18, md: 24 }}
 					>
-						<Flex>
-							<Image
-								rounded={"md"}
-								alt={"product image"}
-								src={data.thumbnails[0]}
-								fit={"cover"}
-								align={"center"}
-								w={"100%"}
-								h={"100%"}
-							/>
-						</Flex>
+						<Center>
+							<Flex>
+								<Image
+									rounded={"md"}
+									alt={"product image"}
+									src={data.thumbnails[0]}
+									fit={"cover"}
+									align={"center"}
+									h={"400px"}
+								/>
+							</Flex>
+						</Center>
 						<Stack spacing={{ base: 6, md: 10 }}>
 							<Box as={"header"}>
 								<Heading
