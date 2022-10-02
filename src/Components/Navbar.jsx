@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Grid, Image } from "@chakra-ui/react";
+import { Avatar, Button, Center, Flex, Grid, Image } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { Theme } from "../Context/ThemeContext";
@@ -37,7 +37,13 @@ const Navbar = () => {
 						mr={[0, 30, -200]}
 					/>
 					<Search />
-					<div></div>
+					<Button rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
+						{state.isAuth ? (
+							<Avatar size={"sm"} name={state.data.firstname.toUpperCase()} />
+						) : (
+							""
+						)}
+					</Button>
 				</Flex>
 				<Flex gap={4} justify="space-between">
 					<div></div>
